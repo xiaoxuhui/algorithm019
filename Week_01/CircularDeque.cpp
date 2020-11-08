@@ -1,32 +1,25 @@
 class MyCircularDeque {
 private:
-    int *szDeque;// 用一个数组表示
-    int head;// 队头下标
-    int end;// 队尾下标
-    int size;//队列最大长度
+    int *deque;         // 用一个数组保存
+    int head;           // 头部索引，指向头部元素所在位置
+    int end;            // 尾部索引，指向尾部元素下一个位置
+    int maxLen;         // 数组最大长度 
 public:
     /** Initialize your data structure here. Set the size of the deque to be k. */
     MyCircularDeque(int k) {
-        size = k + 1;
-        szDeque = new int[k+1];
-        // for(int i = 0;i<size;++i) {
-        //     szDeque[i] = -1;
-        // }
+        maxLen = k + 1;
+        deque = new int[maxLen];
         head = 0;
         end = 0;
     }
-
-    // ~MyCircularDeque() {
-    //     delete[] szDeque；
-    // }
     
     /** Adds an item at the front of Deque. Return true if the operation is successful. */
     bool insertFront(int value) {
-        if(isFull()){
+        if(isFull()) {
             return false;
         }
-        head = (head + size - 1) % size;
-        szDeque[head] = value;
+        head = (head + maxLen - 1) % maxLen;
+        deque[head] = value;
         return true;
     }
     
@@ -35,8 +28,8 @@ public:
         if(isFull()) {
             return false;
         }
-        szDeque[end]=value;
-        end = (end + size + 1) % size;
+        deque[end] = value;
+        end = (end + 1) % maxLen;
         return true;
     }
     
@@ -45,8 +38,7 @@ public:
         if(isEmpty()) {
             return false;
         }
-        //szDeque[head]=-1;
-        head = (head + 1) % size;
+        head = (head + 1) % maxLen;
         return true;
     }
     
@@ -55,8 +47,7 @@ public:
         if(isEmpty()) {
             return false;
         }
-        //szDeque[end]=-1;
-        end = (end + size - 1) % size;
+        end = (end + maxLen - 1) % maxLen;
         return true;
     }
     
@@ -65,7 +56,7 @@ public:
         if(isEmpty()) {
             return -1;
         }
-        return szDeque[head];
+        return deque[head];
     }
     
     /** Get the last item from the deque. */
@@ -73,16 +64,16 @@ public:
         if(isEmpty()) {
             return -1;
         }
-        return szDeque[(end+size-1)%size];
+        return deque[(end + maxLen - 1) % maxLen];
     }
     
     /** Checks whether the circular deque is empty or not. */
     bool isEmpty() {
-        return (head==end);
+        return (end == head);
     }
     
     /** Checks whether the circular deque is full or not. */
     bool isFull() {
-        return ((end+1)%size) == (head);
+        return ((end + 1) % maxLen == head);
     }
 };
