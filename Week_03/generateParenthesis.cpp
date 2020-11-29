@@ -1,6 +1,9 @@
 #include <vector>
 #include <string>
 using namespace std;
+#include <vector>
+#include <string>
+using namespace std;
 
 class Solution {
 private:    
@@ -28,7 +31,7 @@ private:
      * @param right  右括号还有几个可以使用
      * @param res    结果集
      */
-     void dfs(string& curStr, int left, int right, vector<string> &res) {
+     void dfs(string curStr, int left, int right, vector<string> &res) {
         // 因为每一次尝试，都使用新的字符串变量，所以无需回溯
         // 在递归终止的时候，直接把它添加到结果集即可，注意与「力扣」第 46 题、第 39 题区分
         if (left == 0 && right == 0) {
@@ -42,13 +45,11 @@ private:
         }
 
         if (left > 0) {
-            curStr.push_back('(');
-            dfs(curStr, left - 1, right, res);
+            dfs(curStr+"(", left - 1, right, res);
         }
 
         if (right > 0) {
-            curStr.push_back(')');
-            dfs(curStr, left, right - 1, res);
+            dfs(curStr+")", left, right - 1, res);
         }
         
     }
@@ -60,9 +61,9 @@ public:
             return result;
         }
         string current;
-        backtrack(result, current, 0, 0, n);
+        //backtrack(result, current, 0, 0, n);
 
-        //dfs(current, n, n, result);
+        dfs(current, n, n, result);
         return result;
     }
 
