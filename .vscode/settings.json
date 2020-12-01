@@ -3,6 +3,8 @@
         "__hash_table": "cpp",
         "unordered_map": "cpp",
         "vector": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "iosfwd": "cpp",
+        "iterator": "cpp"
     }
 }
