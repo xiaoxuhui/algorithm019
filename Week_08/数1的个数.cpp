@@ -1,11 +1,6 @@
-学习笔记
-    有两周没交作业了，给自己找的借口是换了新工作，呵！但是还是坚持把学习视频看完了，希望没有给团队拖后腿。
-
-    对于191.位1的个数 和 231.2的幂 这两题，我在实际工程中使用的方法应该比题解中的方法来得更加高效，贴出来：
-    
-    class Solution {
+class Solution {
 public:
-    int hammingWeight(int n) {
+    int hammingWeight(unsigned int n) {
 		// 缓存256个汉明距离，即1个字节的所有汉明距离
 		static unsigned char szDist[] = 
 		{ 0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,
@@ -19,13 +14,4 @@ public:
 		// 每8字节计算一次，复杂度为O(1)
         return (szDist[(n >> 24)] + szDist[(n >> 16) & 0xFF] + szDist[(n >> 8) & 0xFF] + szDist[n & 0xFF]);
     }
-
-    bool isPowerOfTwo(int n) {
-        if(n <= 0){
-            return false;
-        }
-        int dist = hammingWeight(n);
-        return (dist == 1);
-    }
 };
-
