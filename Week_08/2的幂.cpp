@@ -16,9 +16,10 @@ public:
     }
 
     bool isPowerOfTwo(int n) {
-        if(n <= 0){
+        if(n <= 0){// 小于等于0肯定不是
             return false;
         }
+        // 汉明距离为1,则一定是2的幂
         int dist = hammingWeight(n);
         return (dist == 1);
     }
